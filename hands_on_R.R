@@ -407,7 +407,7 @@ dim(dado) <- c(1,2,3)
 dado
 
 
-## Matrizes ---> usaremos a função matrix() e passaremos como argumento um atomic vector
+# Matrizes ---> usaremos a função matrix() e passaremos como argumento um atomic vector
 # depois definiremos quantas linhas iremos querer.
 
 matriz <- matrix(dado, nrow=2)
