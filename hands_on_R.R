@@ -413,3 +413,94 @@ dado
 matriz <- matrix(dado, nrow=2)
 matriz
 
+# Caso queira preencher linha por linha basta passar o argumento byrow = TRUE
+
+matriz <- matrix(dado, nrow=2, byrow=TRUE)
+matriz
+
+
+# Arrays: a função array cria uma matriz n-dimensional. Para usar o array
+# forneça um vetor atômico como primeiro argumento e um vetor de dimensões
+# como segundo argumento (dim).
+
+array <- array(c(11:14,21:24,31:34), dim = c(2,2,3))
+array
+
+## Exercício: Crie uma matriz que armazene o nome e o naipe de cada carta
+# de um royal flush.
+
+hand1 <- c("as", "rei", "dama", "valete","dez", "espadas", "espadas", "espadas",
+           "espadas", "espadas")
+
+matrix(hand1, nrow=5)
+matrix(hand1, ncol=2)
+dim(hand1) <- c(5,2)
+
+#Preenchendo linha por linha ou linha por linha
+
+hand1 <-c("as", "espadas", "rei", "espadas", "dama", "espadas", "valete", "espadas",
+          "dez", "espadas") 
+matrix(hand1, nrow=5, byrow=TRUE)  
+matrix(hand1, ncol=2, byrow=TRUE)
+  
+  
+# Classe: Observe aqui que ao alterar as dimensões do seu objeto não alterará o tipo
+# do objeto , mas alterará a class , o atributo do objeto.
+
+dim(dado) <- c(2,3)
+typeof(dado)  
+class(dado)  
+
+attributes(dado)
+
+# Também é possivel aplicar a função class a objetos que não possuem um
+# class atributo.
+
+class("Hello")
+class(4)  
+  
+  
+# Datas e Horários: A hora parece uma string de caracteres quando você exibe, 
+# mas seu tipo de dados é double e sua classe  "POSIXct POSIXt".
+
+agora <- Sys.time()
+agora
+
+typeof(agora)
+
+class(agora)
+
+# Na estrutura POSIXct, cada hora é representada pelo número de segundos que 
+# se passaram entre a hora e 12:00 AM de 1º de janeiro de 1970 (na zona Universal
+# Time Coordinated (UTC).
+
+
+## Fatores: armazena informações categóricas, cor dos olhos, etnia, genero, religiao
+# Para criar um fator passamos um vetor atomico
+
+genero <- factor(c("male", "female","female", "male"))
+typeof(genero)
+
+attributes(genero)
+
+# Usando o unclass é possivel como o R está armazenando o seu vetor
+unclass(genero)
+
+# Também é possivel converter o um factor para um caracter
+
+as.character(genero)
+
+
+# Coerção --. ato de induzir ou compelir, forçar. Como ocorre no R?
+# Se uma string de caracteres estiver presente em um valor atomico ,
+# todo o resto será convertido para string de caracteres. Seo vetor
+# tiver apenas logicos e números, os logicos serão convertidos para número
+# TRUE = 1 e FALSE = 0
+
+sum(c(T,T,F,F))
+
+# Da mesm forma pode pedir
+
+
+
+
