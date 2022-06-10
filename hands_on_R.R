@@ -11,6 +11,7 @@
 ############################################################
 
 # Livro 1: Hands-On Programming with R:
+# https://rstudio-education.github.io/hopr/ 
 
 ###########################
 
@@ -499,7 +500,71 @@ as.character(genero)
 
 sum(c(T,T,F,F))
 
-# Da mesm forma pode pedir
+# Da mesma forma pode pedir para converter os dados de um tipo para outro:
+
+as.character(1)
+
+as.logical(1)
+
+as.numeric(FALSE)
+
+
+
+# Listas : vetores atomicos, pois agrupam dados em uma única dimensão.
+# Podem agrupar objetos diferentes, como listas dentro de listas, arrays, 
+# da mesma forma que a função c() cria um vetor a função list() cria uma lista
+# e seus valores são separados por vírgula.
+
+lista1 <- list(100:130, "R", list(TRUE, FALSE))
+lista1
+
+# Acessando o primeiro valor da lista:
+lista1[[1]]
+# Acessando o subítem do primeiro valor da lista:
+lista1[[1]][2]
+# Acessando o ultimo item da lista:
+lista1[[length(lista1)]]
+
+## Data Frame: versão bidimensional de uma lista, é a forma de armazenamento 
+# de dados mais util para análise de dados. Pense semelhante a estrutura de uma
+# tabela de dados do excel. Dentro da mesma coluna do dataframe , cada célular
+# deve ser do mesmo tipo de dado.
+
+# Criando um dataframe manualmente usando a função data.frame(). 
+
+df <- data.frame(face= c("as", "dois","seis"),
+                 suit= c("clubs", 'clubs', "clubs"),
+                 value= c(1,2,3))
+df
+# Note que cada vetor informado possui o mesmo comprimento
+
+# Agora os nomes serão armazenados no names() um atributo do objeto.
+
+names(df)
+
+# analisando o tipo de dado
+typeof(df)
+
+# analisando a classe
+class(df)
+
+# analisando a estrutura
+
+str(df)
+
+# Em alguns casos o R salva o dataframe como um factor para evitar isso passe 
+# a informação stringAsFactors = FALSE
+
+df <- data.frame(face= c("as", "dois","seis"),
+                 suit= c("clubs", 'clubs', "clubs"),
+                 value= c(1,2,3), stringsAsFactors = T)
+str(df)
+df <- data.frame(face= c("as", "dois","seis"),
+                 suit= c("clubs", 'clubs', "clubs"),
+                 value= c(1,2,3), stringsAsFactors = F)
+
+
+
 
 
 
