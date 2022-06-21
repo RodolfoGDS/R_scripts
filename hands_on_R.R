@@ -564,8 +564,140 @@ df <- data.frame(face= c("as", "dois","seis"),
                  value= c(1,2,3), stringsAsFactors = F)
 
 
+# Carregando base de dados em csv usando o Rstudio 
 
+# Caminho: Environment/Import/From text(base)/seu_diretorio_do_arquivo
 
+# Visualizando o dado
+View(deck)
 
+# As 6 primeiras linhas
+head(deck)
+
+# As 6 ultimas linhas
+tail(deck)
+
+# Salvando o csv ---> (dataframe,nome_que_vai_da,row.names=FALSE)
+# ROW.NAMES = FALSE não permite que seja adcionado uma coluna index
+
+write.csv(x = deck,file = "cards.csv", row.names = FALSE)
+
+# Agora aonde está sendo salvo o meu arquivo??
+
+getwd()
+
+#### Notação do R
+
+# Selecionando Valores: Escreva o nome do objeto e passe entre colchetes
+# um valor ou um conjunto de valores. objeto[ , ], o primeiro valor 
+# agruparar as linhas e segundo as colunas. Podemos passar os índices de 
+# interesse de 6 formas distintas, são elas:
+
+# Inteiros positivos: Tratado como o i,j da algebra linear, linha i e coluna j
+deck[1,1]
+
+# Para extrair mais de um valor use o vetor c().
+deck[1, c(1,2,3)]
+
+# Esse conjunto de dados selecionado pode ser armazenado em uma nova variavel
+
+nova <- deck[1, c(1,2,3)]
+nova
+
+# subconjunto com valores repetidos.
+deck[c(1,1), c(1,2,3)]
+
+# Da mesma forma que aplicamos ad dataset, podemos aplicar a um vetor atomico/
+
+vetor <- c(6,1,3,6,10,5)
+vetor[1:3]  
+
+# Lembre que em R a indexação começa em 1. Quando é informado apenas uma coluna
+# o R retornará um vetor, 
+
+deck[1:3, 1]
+
+# Mas caso queira que seja retornado um dataset basta usar o drop=FALSE
+
+deck[1:3, 1, drop=FALSE]
+
+# Inteiros negativos também são usados para seleção de dados. 
+# No caso de passar um valor negativo o indice referente a ele será excluido
+
+deck[-(2:52),1:3]
+
+# Para criar um objeto vazio basta o zero 0
+
+deck[0,0]
+
+# Valores em branco são úteis quando se quer extrair tudo de uma dimensão.
+
+deck[1, ]
+  
+
+# Valores lógicos servem tanto para linhas como para colunas, toda a informação
+# passada como falsa será excluida do resultado de retorno.
+
+deck[1, c(T, T, F)]
+vetor  
+vetor[c(F,T,F,F,T,F)]  
+
+# Nomes: é possivel passar os nomes das colunas por exemplo.
+deck[1, c("face", "value")]
+
+deck[ ,'value']
+
+######
+# Criando uma função para destribuir as cartas.
+
+deal <- function(baralho){
+  
+  baralho[1, ]
+}
+
+# dessa maneira a cima a mesma carta sempre será distribuida. A função nao 
+# entende que a carta já saiu. precisamos então embaralhar a cada rodada de
+# distribuição de cartas.
+
+random <- sample(1:52, size= 52)
+random
+
+deck2 <- deck[random, ]
+deck2
+
+# Precisamos executar o random a cada rodada para que seja embaralhado 
+
+shuffle <- function(cartas){
+  random <- sample(1:52, size = 52)
+  cartas[random, ]
+}
+
+deal(deck)
+deal(deck)
+
+### Cifrões e colchetes duplos, cifrões são uteis para tirar dados de apenas
+# uma coluna
+
+deck$value
+deck$suit
+
+# Podemos usar esse tipo de seleção para ajudar em calculos
+mean(deck$value)
+median(deck$value)
+
+# Podemos usar o cifrão para listas
+lst <- list(numbers=c(1,2), logical= TRUE, strings= c("a","b", "c"))
+lst
+lst$numbers
+lst$logical
+
+sum(lst$numbers)
+
+# Outra forma de criar subconjuntos é usando o duplo colchete [[ ]]
+lst[[1]]
+
+# Ou o simple colchete
+lst["numbers"]
+lst[["numbers"]]
 
 
