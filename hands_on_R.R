@@ -700,4 +700,25 @@ lst[[1]]
 lst["numbers"]
 lst[["numbers"]]
 
+############ Modificando Valores
 
+# Mundando um valor de um vetor 
+
+vetor <- c(0,0,0,0,0,0,0,0,0)
+vetor[1] <- 10000
+vetor
+
+# Substituir vários valores ao mesmo tempo, desde que o número de novos valores
+# seja igual ao número de valores selecionados
+vetor[c(1,3,5)] <- c(1,1,1)
+vetor  
+
+vetor[4:6] <- vetor[4:6] + 1  
+vetor  
+  
+  
+  
+  
+  
+  
+  
