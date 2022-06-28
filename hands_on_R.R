@@ -715,10 +715,163 @@ vetor
 
 vetor[4:6] <- vetor[4:6] + 1  
 vetor  
+
+# Criando valores que ainda não existem 
+
+length(vetor)
+vetor[10] <- 5555  
+vetor  
+
+# Também é possivel adcionar uma nova coluna de dados dessa forma
+
+names(deck)
+deck$nova <- 1:52  
+deck  
+
+# Da mesma forma que é possviel criar é possivel excluir
+
+deck$nova <-  NULL
+names(deck)
+
+# Vamos então selecionar agora um subgrupo do dataset deck e altera-los no campo value
+
+deck[c(13,26,39,52), ]
+deck$value[c(13,26,39,52)]
+
+deck$value[c(13,26,39,52)] <- 14
+deck$value[c(13,26,39,52)]
+
+
+# Testes lógicos
+
+1>2
+1 > c(0,1,2)
+c(1,2,3) == c(3,2,1)
+
+# O operador %in% testa o valor do lado esquerdo na condição dele existir ou não do lado direito
+
+1 %in% c(3,4,5)
+
+c(1,2) %in% c(3,4,5)
+
+c(1,2,3) %in% c(3,4,5)
+
+c(1,2,3,4) %in% c(3,4,5)
+
+
+# Infromações faltantes --  NA
+
+1  + NA
+
+NA == 1
+
+c(NA, 1:50)
+
+mean(c(NA, 1:50))
+
+# Caso queira desconsiderar o NA...
+mean(c(NA, 1:50), na.rm = TRUE)
+
+# Para descobrir se um valor é NA é bem simples
+is.na(NA)
+vetor <- c(1,2,3,NA)
+is.na(vetor)
+
+
+
+# Trabalhando com ambientes:
+
+install.packages("pryr")
+library(pryr)
+parenvs(all= TRUE)
+
+
+# as.enviroemnt retorna o ambiente correspondente
+
+as.environment("package:stats")
+
+# Apenas 3 ambientes vem com função de acesso  própria
+
+globalenv()
+baseenv()
+emptyenv()
+
+# Para consultar o ambiente pai dos ambiente a cima basta usar parent.env()
+
+parent.env(globalenv())
+
+parent.env(baseenv())
+
+parent.env(emptyenv())
+
+
+# Visualizando os objetos salvo em um ambiente
+
+ls(emptyenv())
+ls(globalenv())
+
+# Para salvar um objeto em um ambiente específico basta usar o assign
+# x = nome do objeto, value = valor do objeto, envir= ambiente destino
+
+assign(x ="novo",value = " Olá Mundo", envir = globalenv())
+
+globalenv()$novo
+
+# Para descobrir qual é o ambiente ativo. Normalmente o o ambiente global é o padrão 
+
+environment()
+
+
+###################
+#### Projeto 3  --- > Maquina caçã níqueis
+
+
+### Programas
+##
+# Criar uma função para escolher aleatoriamente os 3 simbolos que vão aparecer
+
+get_symols <- function(){
   
+  roda <- c("DD", "7","BBB", "BB", "B", "C", "0")
+  sample(roda, size= 3, replace= TRUE,
+         prob = c(0.03,0.03, 0.06, 0.1, 0.025, 0.01, 0.52))
+}
+
+get_symols()
+
+
+# Agora que já sabemos sortear as figuras, basta saber premiar o jogador
+# Vamos criar a função score e a funação jogar.
+
+jogar <-  function(){
   
+  #gerar os simbolos
+  simbolos <- get_symols()
   
+  #mostrar o resultado
+  print(simbolos)
   
+  #pontuar os simbolos
+  score(simbolos)
   
-  
-  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
