@@ -822,39 +822,6 @@ globalenv()$novo
 environment()
 
 
-###################
-#### Projeto 3  --- > Maquina caçã níqueis
-
-
-### Programas
-##
-# Criar uma função para escolher aleatoriamente os 3 simbolos que vão aparecer
-
-get_symols <- function(){
-  
-  roda <- c("DD", "7","BBB", "BB", "B", "C", "0")
-  sample(roda, size= 3, replace= TRUE,
-         prob = c(0.03,0.03, 0.06, 0.1, 0.025, 0.01, 0.52))
-}
-
-get_symols()
-
-
-# Agora que já sabemos sortear as figuras, basta saber premiar o jogador
-# Vamos criar a função score e a funação jogar.
-
-jogar <-  function(){
-  
-  #gerar os simbolos
-  simbolos <- get_symols()
-  
-  #mostrar o resultado
-  print(simbolos)
-  
-  #pontuar os simbolos
-  score(simbolos)
-  
-}
 
 
 
