@@ -93,6 +93,235 @@ ggplot(data=mpg)+
 
 
 
+# Mapeamentos estéticos: adcionando uma terceira variável ao grafico do ggplot
+# Nesse caso vamos aplicar cor as diferentes classes que estão relacionadas ao tamanho do veículo
+names(mpg)
+unique(mpg["class"])
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(x= displ, y= hwy, color=class))
+
+# Agora vamos fazer usar o tamanho do ponto para diferenciar as classes.
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(x=displ,  y= hwy, size = class))
+# Podemos usar uma escala de transparencia informando o alpha ou mudando o tipo de ponto pelo shape
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(x=displ, y= hwy, alpha= class))
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(x=displ, y= hwy, shape= class))
+
+# Caso queira apenas mudar as cores do ponto sem vincular a uma forma de classificar,
+# basta mudar a sintaxe.Assim a cor não transmite informaçãoes sobre a viariável apenas 
+# altera a apareencia do gráfico
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(x=displ, y= hwy), color= "red")
+
+
+# Dividindo o gráfico em facetas 
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(x= displ, y= hwy))+
+  facet_wrap(~class, nrow = 2)
+
+# Para combinar duas variáveis use o facet_grid()
+unique(mpg["drv"])
+unique(mpg["cyl"])       
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(x=displ, y= hwy))+
+  facet_grid(drv~cyl)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+
+# Objetos Geométricos ---> vamos agor amudar o objeto geométrico do gráfico
+ggplot(data=mpg)+
+  geom_smooth(mapping = aes(x=displ, y=hwy))
+
+
+# Passando mais uma variável para dar mais informação ao gráfico
+ggplot(data=mpg)+
+  geom_smooth(mapping= aes(x=displ, y = hwy, linetype=drv))
+
+# Passando informação usando o group
+ggplot(data=mpg)+
+  geom_smooth(mapping=aes(x=displ, y= hwy, group = drv))
+
+
+# Mudando as cores
+
+ggplot(data=mpg)+
+  geom_smooth(mapping=aes(x= displ, y= hwy, color = drv))
+
+# Tirando a Legenda
+
+ggplot(data=mpg)+
+  geom_smooth(mapping=aes(x= displ, y= hwy, color = drv),
+                        show.legend = FALSE)
+
+
+# Sobrepondo gráficos de pontos e linhas ---> geom_point() geom_smooth()
+
+ggplot(data=mpg)+
+  geom_point(mapping= aes(x=displ, y=hwy))+
+  geom_smooth(mapping = aes(x=displ, y=hwy))
+
+## Obs: Note que na linha de código do gráfico a cima passamos duas vezes x e y,
+## isso não é necessário.
+
+
+ggplot(data=mpg, mapping=aes(x=displ, y=hwy))+
+  geom_point()+
+  geom_smooth()
+
+## Obs: Passando todo os dados do mapping na primeira função 
+
+
+# Da mesma forma é possivel passar variáveis e estilos específicos em cada geometria 
+
+ggplot(data=mpg, mapping = aes(x=displ, y= hwy))+
+  geom_point(mapping = aes(color = class))+
+  geom_smooth()
+
+
+# Também é possível usar um filtro
+
+ggplot(data=mpg, mapping= aes(x= displ, y=  hwy))+
+  geom_point(mapping = aes(color = class))+
+  geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE)
+
+
+## OBS: se ---> standart error  -----> ?geom_smooth()
+
+# Formas diferentes de passar a informação no ggplot...
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+
+ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
 
 
 
+# Grafico 1 :
+
+ggplot(data=mpg, mapping=aes(x= displ, y= hwy))+
+  geom_point()+
+  geom_smooth(se=F)
+
+# Grafico 2 :
+
+ggplot(data=mpg, mapping=aes(x=displ, y=hwy, group=drv))+
+  geom_point()+
+  geom_smooth(se=FALSE)
+
+# Grafico 3 :
+
+ggplot(data=mpg,mapping=aes(x=displ, y=hwy, color=drv))+
+  geom_point()+
+  geom_smooth(se=FALSE)
+
+# Gráfico 4 :
+
+ggplot(data=mpg, mapping=aes(x=displ, y= hwy))+
+  geom_point(mapping=aes(color=drv))+
+  geom_smooth(se=F)
+
+#Gráfico 5 :
+
+ggplot(data = mpg, mapping=aes(x=displ, y=hwy, linetype= drv))+
+  geom_point(mapping=aes(color=drv))+
+  geom_smooth(se=F)
+?geom_point  
+  
+# Gráfico 6 : 
+
+ggplot(data = mpg,mapping = aes(x=displ,y=hwy,fill = drv)) +
+  geom_point(shape=21, size=5, colour = "white",stroke=3)
+
+
+
+ggplot(mtcars, aes(wt, mpg, drv)) +
+  geom_point(shape = 21, size = 5, stroke = 5)+
+  geom_point()
+
+
+##### Transformações Estatísticas
+
+ggplot(data=diamonds)+
+  geom_bar(mapping = aes(x=cut))
+names(diamonds)
+
+# obs: Gráficos de barras , histogramas e polígonos de frequencia agrupam  seus 
+# dados e em seguida, plotam as contagens de bin.
+# Por de traz da função geom_bar() o algoritmo stat ( stat_count() ) trabalha fazendo a contagem e 
+# agrupando no eixo X.
+
+ggplot(data= diamonds) +
+   stat_count(mapping(aes(x= cut)))
+
+# Caso queira barras que indiquem proporção e não contagem  basta pasasr no y = stat(prop)
+
+ggplot(data=diamonds) +
+  geom_bar(mapping = aes(x= cut, y = stat(prop), group=1))
+
+# É possível também destacar os valores  usando a summary
+
+ggplot(data=diamonds)+
+  stat_summary(mapping= aes(x= cut, y = depth),
+           fun.min = min,
+           fun.max = max,
+           fun = median)
+
+
+### Ajustes e posição 
+
+## Colorindo as barras usando o colour e o fill
+
+ggplot(data = diamonds)  +
+  geom_bar(mapping = aes(x=cut, colour = cut))
+
+ggplot(data= diamonds) +
+  geom_bar(mapping= aes(x=cut, fill= cut))
+
+# Caso queira pode preencher utilizando outra variável 
+
+ggplot(data= diamonds)+
+  geom_bar(mapping = aes(x=cut, fill= clarity))
+
+
+# As três opções do argumento position = "identity", "dodge" , "fill" . 
+
+ggplot(data=diamonds, mapping= aes(x=cut, fill= clarity))+
+  geom_bar(alpha= 1/5, position= "identity")
+
+ggplot(data=diamonds, mapping=aes(x=cut, colour= clarity))+
+  geom_bar(fill= NA, position="identity")
+
+# A position= "fill", coloca todas as barras do mesmo tamanho 
+ggplot(data=diamonds) +
+  geom_bar(mapping=aes(x=cut, fill = clarity), position = "fill")
+
+# A position = "dodge" coloca os objetos sobrepostos dispostos lado a lado 
+
+ggplot(data= diamonds)+
+  geom_bar(mapping = aes(x = cut, fill=clarity), position = "dodge")
+
+## No caso de gráfico de pontos com muitos pontos caindo no mesmo lugar, fica dificil 
+#  observar onde é a concentração uma vez que ele está sobreposto.
+# É possivel usar a configuração position = "jitter" que irá adcionar uma quantidade aleatória
+# de ruído para cada ponto. 
+
+ggplot(data= mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy), position = "jitter")
