@@ -325,3 +325,77 @@ ggplot(data= diamonds)+
 
 ggplot(data= mpg)+
   geom_point(mapping = aes(x = displ, y = hwy), position = "jitter")
+
+
+## Sistemas de coordenadas ---. alterando os eixos x e y do seu gráfico
+
+ggplot(data = mpg, mapping = aes(x= class, y = hwy ))+
+  geom_boxplot()
+
+# alterando os eixos do grafico coord_flip()
+ggplot(data = mpg, mapping = aes(x=class, y=hwy))+
+  geom_boxplot()+
+  coord_flip()
+
+# Definindo a proporção de aspecto corretamente para mapas
+# Útil para dado espaciais
+
+nz <- map_data("nz")
+ggplot(nz, aes(long, lat, group = group))+
+  geom_polygon(fill = "white", colour = "black")
+
+ggplot(nz,aes(long, lat, group = group)) +
+  geom_polygon(fill= "white", colour = "black")+
+  coord_quickmap()
+
+# Usando uma projeção polar para alterar os eixos de representação gráfica
+
+bar <-  ggplot(data=diamonds) +
+  geom_bar(
+    mapping=aes(x=cut, fill= cut),
+    show.legend = FALSE,
+    width = 1
+  )+
+  theme(aspect.ratio = 1) +
+  labs(x = NULL, y= NULL)
+
+bar + coord_flip()
+bar + coord_polar()
+
+
+# Gramática em camadas de gráfico 
+## Modelo de código 
+' ' '
+ggplot(<data>)+
+  <GEOM_FUNCTION> (
+    mapping = aes(<MAPPINGS>),
+    stat = <STAT>,
+    position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION>+
+  <FACET_FUNCTION>
+
+' ' '
+
+# Trasnformação de dados
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
