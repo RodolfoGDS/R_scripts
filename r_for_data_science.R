@@ -376,19 +376,44 @@ ggplot(<data>)+
   <FACET_FUNCTION>
 
 ' ' '
-
+##########################
 # Trasnformação de dados
 
 
+### Noções básicas de dplyr:
 
+# dplyr::filter() ---> filtra as observções
+# dplyr::arrange() --> reordena as linhas
+# dplyr::select() ---> escolha variáveis pelo seu nome
+# dplyr::mutate() ---> crie novas variáveis 
+# dplyr::summarise() ---> obten ha um sumário
 
+# Vamos usar o dataset de flights.
 
+library(nycflights13)
+library(tidyverse)
 
+# Dados de primeiro de janeiro
+filter(flights, month == 1, day ==1)
+jan1 <- filter(flights, month==1, day==1)
 
+# Dados de 25 de dezembro
+dez25 <- filter(flights, month == 12, day == 25)
 
+# Note que month não é um atributo e sim uma comparação lógica usada para filtrar o dado. Por
+# isso usa == e não  = 
 
+# Agora vamos utilizar os operadores lógicos
 
+filter(flights, month ==11 | month == 12)
+filter(flights, month %in% c(11,12))
 
+## Lei de De Morgan: !(x & y) é o mesmo que !x | !y que é igual a !(x | Y) que por fim é !x & !y
+
+# Exemplo para voos atrasados na chegada ou na partida em mais de 2 horas.
+
+filter(flights, !(arr_delay > 120 | dep_delay > 120))
+filter(flights, arr_delay <= 120, dep_delay <= 120)
 
 
 
