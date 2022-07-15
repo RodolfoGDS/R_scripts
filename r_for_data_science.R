@@ -415,12 +415,75 @@ filter(flights, month %in% c(11,12))
 filter(flights, !(arr_delay > 120 | dep_delay > 120))
 filter(flights, arr_delay <= 120, dep_delay <= 120)
 
+# Valores ausentes --> quase toda operação que envolve um valor NA será NA
+
+NA > 5
+10 == NA
+
+NA + 10
+NA/2
+
+NA == NA
+
+x <- NA
+y <- NA
+
+x == y
+
+# Como resolver essa situação?? usamos o is.na()
+
+is.na(x)
+is.na(y)
+is.na(x) == is.na(y)
+
+# Agora quando usamos o filter o valor retorna irá incluir os valores TRUE e excluir os FALSE e NA
+
+df <- tibble(x = c(1,NA,3))
+
+filter(df, x>1)
+
+filter(df,is.na(x) | x >1)
+
+# Vamos usar o dataset nycflights para algumas consultas:
+
+# 1 -  Voos com atraso de 2h ou mais na chegada (arr_delay)
+
+filter(flights,arr_delay == 2 | arr_delay >= 2 )
+
+# 2 - Voos para huston (dest == IAH e HOU)
+
+filter(flights, dest == "IAH" | dest =="HOU")
+
+# 3 - Voos operados pela United airlines(UA), America airlines(AA) ou Delta airlines(DL)
+select(flights, carrier)
+
+filter(flights, carrier == "UA"| carrier == " AA"| carrier == "DL")
+
+# 4 - Voos que partiram no verão (jan // feb // mar)
+
+unique(select(flights, month))
+
+filter(flights,month == 1 | month == 2 | month == 3 )
 
 
 
+## Organize as linhas com arrange()
+
+arrange(flights, year, month, day)
+
+#Use o desc() para reordenar uma coluna em ordem decrescente
+
+arrange(flights, desc(year))
 
 
+# Agora vamos seleiconar colun as com o select
 
+select(flights, year, month, day)
 
+# Agora podemos passar as colunas como intervalo, 
 
+select(flights, year:day)
 
+# Podemos tambem dizer quem nao queremos selcionar da mesma forma
+
+select(flights, -(year:month))
