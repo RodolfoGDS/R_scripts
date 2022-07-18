@@ -487,3 +487,94 @@ select(flights, year:day)
 # Podemos tambem dizer quem nao queremos selcionar da mesma forma
 
 select(flights, -(year:month))
+
+## Adcionando novas variáveis com o mutate();
+
+# criando um dataset menor
+flights_small <- select(flights, year:day,ends_with("delay"), distance, air_time)
+names(flights_small)
+# usando o mutate,
+flights_small <- mutate(flights_small, gain = dep_delay- arr_delay, speed = distance/air_time *60)
+
+names(flights_small)
+
+flights_small <- mutate(flights_small, gain=dep_delay, hours= air_time/60,
+                        gain_per_hour = gain/hours )
+names(flights_small)
+
+## Caso queira apenas as novas variáveis basta usar o transmute
+
+transmute(flights, gain= dep_delay - arr_delay,hours = air_time/60,
+          gain_per_hour = gain/hours)
+
+## Funções de criação úteis
+
+# Classificação usando o min_rank() determina o primeiro, segundo.... de cada objeto
+
+y <-  c(1,2,2,NA,3,4)
+min_rank(y)
+
+# Caso queria ao contrario do ultimo para o primeiro use o desc()
+
+min_rank(desc(y))
+
+# As variações de min_rank()...
+row_number(y)
+
+dense_rank(y)
+percent_rank(y)
+cume_dist(y)
+
+
+## Resumos agrupados com summarise()
+
+summarise(flights, delay = mean(dep_delay, na.rm= TRUE))
+
+# Usar o summarise se torna mais eficiente com o group_by. retornando sumarios agrupados
+
+by_day <- group_by(flights, year, month, day)
+summarise(by_day, delay = mean(dep_delay, na.rm=T))
+
+
+# Combinando operações com o operador pipe
+
+delays <- flights %>% 
+  group_by(dest) %>% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = T)
+  ) %>% 
+  filter(count > 20, dest != "HNL")
+
+# Valores ausentes
+
+not_cancelled <- flights %>% 
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+not_cancelled %>% 
+  group_by(year,month,day) %>% 
+  summarise(mean = mean(dep_delay))
+
+
+### Contagens --> Sempre que fizer uma agregração é importante fazer um acontagem
+
+delays <-  not_cancelled %>% 
+  group_by(tailnum) %>% 
+  summarise(delay = mean(arr_delay))
+
+ggplot(data=delays, mapping = aes(x=delay))+
+  geom_freqpoly(binwidth = 10)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
