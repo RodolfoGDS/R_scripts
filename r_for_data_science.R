@@ -567,8 +567,48 @@ ggplot(data=delays, mapping = aes(x=delay))+
   geom_freqpoly(binwidth = 10)
 
   
-  
-  
+## Análise exploratória de dados : desenvolver uma compreeensão de seus dados.
+# Combinando ggplot2 com tidyverse.
+
+library(tidyverse)
+tidyverse_update()
+library(ggplot2)  
+
+
+
+# definições:
+# 1 - Uma variável é uma quantidade, qualidade ou propriedade que você pode medir.
+# 2 - Um valor é o estado de uma variável quando você a mede. O valor de uma variável 
+## pode mudar de medição para medição.
+# 3 - uma observação é um conjunto de medições
+# 4 - Dados tabulares são um conjunto de valores
+
+
+## Variação é a tendencia dos valores de uma variável mudarem de medição para medição.
+
+# Visualizando distribuições. 
+# Variável categórica so pode receber um valor de conjuto de valores.
+# Os gráficos de barra são melhores para examinar uma distribução de uma variável categorica
+
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x =cut))
+
+# A altura das barras mostra quantas observações ocorreram. 
+
+diamonds %>% 
+  count(cut)
+
+# Uma variável continua pode receber um valor de um conjunto infinito de possbilidades
+# dessa maneira a melhor forma de examinar uma variável continua é com histograma
+
+ggplot(data=diamonds)+
+  geom_histogram(mapping = aes(x=carat), binwidth = 0.5)
+
+# Essa contagem por intervalo pode ser feita de forma direta também 
+
+diamonds %>% 
+ dplyr::count(ggplot2::cut_width(carat, 0.5))
+
   
   
   
