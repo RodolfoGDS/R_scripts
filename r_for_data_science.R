@@ -609,6 +609,90 @@ ggplot(data=diamonds)+
 diamonds %>% 
  dplyr::count(ggplot2::cut_width(carat, 0.5))
 
+## Explorando as barras do grafico histograma
+
+smaller <-  diamonds %>% 
+  filter(carat < 3)
+
+ggplot(data = smaller, mapping = aes(x=carat))+
+  geom_histogram(binwidth = 0.1)
+
+## Caso queira avalair mais uma variável no mesmo histograma é melhor usar
+## o geom_freqpoly
+
+ggplot(data=smaller,mapping = aes(x= carat, colour = cut))+
+  geom_freqpoly(binwidth = 0.1)
+
+## manipulando as a espessura das barras do histogramas para ver tendencias,
+## e agrupamentos 
+
+
+ggplot(data=smaller, mapping = aes(x= carat))+
+  geom_histogram(binwidth = 0.01)
+  
+
+## Vamos olhar um dataset sobre tempo de duração de uma erupção vulcanica e /
+## ver como podemos separar dois grandes grupos.
+
+ggplot(data = faithful, mapping = aes(x =eruptions))+
+  geom_histogram(binwidth = 0.25)
+
+
+## Valores incomuns: outliers são pontos que não parecem se encaixar no padrão.
+## Podem ser erros de entrada de dados, outras vezes valores discrepantes. 
+## Analisando esses valores no histograma
+
+ggplot(diamonds)+
+  geom_histogram(mapping = aes(x=y),binwidth =0.5)
+
+# Vamos ampliar os valores do eixo y usando o coord_cartesian()
+
+ggplot(diamonds) +
+  geom_histogram(mapping = aes(x=y),binwidth = 0.5)+
+  coord_cartesian(ylim=c(0,50))
+  
+# Agora vamos separa esses valores outliers usando o dplyr
+
+unusual <- diamonds %>% 
+  filter(y < 3 | y > 20) %>% 
+  select(price, x, y,z) %>% 
+  arrange(y)
+unusual
+  
+
+
+## Valores Ausentes -- > como tratar
+
+
+#Separando as linhas --- opção não muito recomendada
+
+diamonds2 <- diamonds %>% 
+  filter(between(y,3,20))
+
+# Substituindo os valores incomuns para valores ausentes
+
+diamonds2 <- diamonds %>% 
+  mutate(y = ifelse(y < 3 | y > 20,NA,y)) 
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
   
