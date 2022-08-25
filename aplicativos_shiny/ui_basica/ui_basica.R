@@ -161,15 +161,72 @@ library(shiny)
 
 # Saídas // tabelas
 
-ui <- fluidPage(
-    tableOutput("static"),
-    dataTableOutput("dynamic")
-)
+#ui <- fluidPage(
+ #   tableOutput("static"),
+  #  dataTableOutput("dynamic")
+#)
 
-server <- function(input, output, session){
-    output$static <- renderTable(head(mtcars))
-    output$dynamic <- renderDataTable(mtcars, options = list(pageLength = 5))
-}
+#server <- function(input, output, session){
+  #  output$static <- renderTable(head(mtcars))
+   # output$dynamic <- renderDataTable(mtcars, options = list(pageLength = 5))
+#}
+
+# Gráficos
+
+# <- fluidPage(
+ #   plotOutput("plot", width ="400px")
+#)
+
+#server <- function(input,output, session){
+ #   output$plot <- renderPlot(plot(1:5), res = 96)
+#}
+### Reatividade Básica
+
+#ui <- fluidPage(
+ #   textInput("name", "What's your name?"),
+  #  textOutput("greeting")
+#)
+
+#server <- function(input,output,session){
+#     output$greeting <- renderText({
+#         paste0("hello ", input$name, "!")
+#     })
+# }
+# 
+# 
+# ui <- fluidPage(
+#     textInput("name", "What's your name?"),
+#     textOutput("greeting")
+# )
+# 
+# # server <- function(input,output, sessions){
+# #     output$greeting <- renderText({paste0("hello ", input$name)})
+# # }
+# # 
+# # server <- function(input,output,session){
+# #     greeting <- reactive(paste0("hello ", input$name))
+# #     output$greeting <- renderText({
+# #         greeting()
+# #     })
+# # }
+# 
+# server <- function(input, output, server){
+#     output$greeting <- renderText({
+#         paste0("Hello ", input$name)
+#     })
+# }
+
+
 
 
 shinyApp(ui = ui, server = server)
+
+
+
+
+
+
+
+
+
+
