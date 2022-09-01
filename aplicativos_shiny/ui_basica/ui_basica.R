@@ -314,35 +314,79 @@ library(ggplot2)
 
 # Clcik Button
 
+# ui <- fluidPage(
+#     fluidRow(
+#         column(3,
+#                numericInput("lambda1", label = "lambda1", value = 3),
+#                numericInput("lambda2", label = "lambda2", value = 5),
+#                numericInput("n", label = "n", value = 1e4, min = 0),
+#                actionButton("simulate", "Simulate!")
+#                ),
+#         column(9, plotOutput("hist"))
+#     )
+# )
+# 
+# server <-  function(input, output, session){
+#     
+#     x1 <-  reactive({
+#         input$simulate
+#         rpois(input$n, input$lambda1)
+#     })
+#     
+#     x2 <- reactive({
+#         input$simulate
+#         rpois(input$n, input$lambda2)
+#     }) 
+#     
+#     output$hist <- renderPlot({
+#         freqpoly(x1(), x2(), binwidth = 1, xlim = c(0,40))
+#     }, res = 96)
+# }
+#   
+# 
+# ui <- fluidPage(
+#       fluidRow(
+#           column(3,
+#                  numericInput("lambda1", label = "lambda1", value = 3),
+#                  numericInput("lambda2", label = "lambda2", value = 5),
+#                  numericInput("n", label = "n", value = 1e4, min = 0),
+#                  actionButton("simulate", "Simulate!")
+#                  ),
+#           column(9, plotOutput("hist"))
+#       )
+#   )
+# 
+# server <-  function(input, output, session){
+#   x1 <-  eventReactive(input$simulate, {
+#     rpois(input$n, input$lambda1)
+#   })
+#   x2 <- eventReactive(input$simulate,{
+#     rpois(input$n, input$lambda2)
+#   })
+#   
+#   output$hist <- renderPlot({
+#     freqpoly(x1(),x2(), binwidth = 1 , xlim = c(0,40))
+#   }, res = 96)
+# }
+
+# observadores
+
 ui <- fluidPage(
-    fluidRow(
-        column(3,
-               numericInput("lambda1", label = "lambda1", value = 3),
-               numericInput("lambda2", label = "lambda2", value = 5),
-               numericInput("n", label = "n", value = 1e4, min = 0),
-               actionButton("simulate", "Simulate!")
-               ),
-        column(9, plotOutput("hist"))
-    )
+  textInput("name", "what's your name?"),
+  textOutput("greeting")
 )
 
-server <-  function(input, output, session){
-    
-    x1 <-  reactive({
-        input$simulate
-        rpois(input$n, input$lambda1)
-    })
-    
-    x2 <- reactive({
-        input$simulate
-        rpois(input$n, input$lambda2)
-    }) 
-    
-    output$hist <- renderPlot({
-        freqpoly(x1(), x2(), binwidth = 1, xlim = c(0,40))
-    }, res = 96)
-}
+server <- function(input, output, session){
+  string <- reactive(paste0("Hello ", input$name, "!"))
   
+  output$greeting <-  renderText(string())
+  observeEvent(input$name, {
+    message("Greeting performed")
+  })
+}
+
+
+
 shinyApp(ui = ui, server = server)
 
 
