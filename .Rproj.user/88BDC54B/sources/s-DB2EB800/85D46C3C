@@ -3,9 +3,9 @@
     "path": "~/projetos_versionados/R_scripts/aplicativos_shiny/ui_basica/ui_basica.R",
     "project_path": "aplicativos_shiny/ui_basica/ui_basica.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "395660787",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1661185689488.0,
     "source_on_save": false,
     "relative_order": 2,
@@ -13,14 +13,14 @@
         "source_window_id": "",
         "Source": "Source",
         "cursorPosition": "387,0",
-        "scrollLine": "369"
+        "scrollLine": "371"
     },
     "folds": "",
-    "lastKnownWriteTime": 1661968103,
+    "lastKnownWriteTime": 1662395754,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1662047787552,
+    "last_content_update": 1662395754569,
     "read_only": false,
     "read_only_alternatives": []
 }

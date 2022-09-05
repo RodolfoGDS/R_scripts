@@ -1,0 +1,5 @@
+## Aula de SNA  MBA USP - ESALQ
+
+library(readxl)
+
+rede_rh <-data.frame(read_excel("C:/Users/rodolfo.paula/MBA_ESALQ_RODOLFO/SNA/rede_rh.xlsx"))
