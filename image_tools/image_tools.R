@@ -12,7 +12,7 @@ ui <-  fluidPage(
 server <-  function(input, output, session){
     options(shiny.maxRequestSize = 50 * 1024^2 )
     output$rasters <- renderTable(input$rasterInput)
-    raster <- raster(input$rasterInput)
+    raster <- raster(input$rasterInput) 
     output$plot <- renderPlot(raster)
 }
 # Run the application 

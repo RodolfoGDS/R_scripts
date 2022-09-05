@@ -370,20 +370,20 @@ library(ggplot2)
 # }
 
 # observadores
-
-ui <- fluidPage(
-  textInput("name", "what's your name?"),
-  textOutput("greeting")
-)
-
-server <- function(input, output, session){
-  string <- reactive(paste0("Hello ", input$name, "!"))
-  
-  output$greeting <-  renderText(string())
-  observeEvent(input$name, {
-    message("Greeting performed")
-  })
-}
+# 
+# ui <- fluidPage(
+#   textInput("name", "what's your name?"),
+#   textOutput("greeting")
+# )
+# 
+# server <- function(input, output, session){
+#   string <- reactive(paste0("Hello ", input$name, "!"))
+#   
+#   output$greeting <-  renderText(string())
+#   observeEvent(input$name, {
+#     message("Greeting performed")
+#   })
+# }
 
 
 
