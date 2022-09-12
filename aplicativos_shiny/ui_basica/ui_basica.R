@@ -137,16 +137,7 @@ library(shiny)
  #                  max = 100, step = 5, animate = T)
 
 # Criando listas de subgrupo no selectInput
-#ui <-  fluidPage(
- #   selectInput("estado", "Escolha um estado:",
-  #              list(`Costa Leste` = list("NY", "NJ", "CT"),
-   #                  `Costa Oeste` = list("WA", "OR", "CA"),
-    #                 `Midwest` = list("MN", "WI", "IA"))
-#    ),
- #   textOutput("resultado")
-#)
-
-
+ 
 # Saídas //  texto 
 
 #ui <-  fluidPage(
