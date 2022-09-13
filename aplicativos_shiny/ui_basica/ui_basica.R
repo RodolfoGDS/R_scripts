@@ -377,27 +377,91 @@ library(ggplot2)
 # }
 
 
-ui <-  fluidPage(
-  titlePanel("Central limit theorem"),
-  sidebarLayout(
-    sidebarPanel( plotOutput("hist")
-      
-    ),
-    mainPanel(
-      numericInput("m", "Number of samples", 2, min = 1, max = 100)
-     
-    )
+# ui <-  fluidPage(
+#   titlePanel("Central limit theorem"),
+#   sidebarLayout(
+#     sidebarPanel( plotOutput("hist")
+#       
+#     ),
+#     mainPanel(
+#       numericInput("m", "Number of samples", 2, min = 1, max = 100)
+#      
+#     )
+#   )
+# )
+# 
+# 
+# server <- function(input, output, session){
+#   output$hist <- renderPlot({
+#     means <- replicate(1e4, mean(runif(input$m)))
+#     hist(means, breaks = 20)
+#   }, res = 96)
+#   
+# }
+
+# ui <- fluidPage(
+#   tabsetPanel(
+#     tabPanel("Import data",
+#              fileInput("file", "Data", buttonLabel = "Upload..."),
+#              textInput("delim", "Delimiter (leave blank to guess","" ),
+#              numericInput("skip", "Rows to skip", 0, min = 0),
+#              numericInput("rows", "Rows to preview", 10, min = 1 )),
+#     
+#     tabPanel("Set parameters"),
+#     tabPanel("Visualise results")
+#   )
+# )
+
+
+# ui <-  fluidPage(
+#   sidebarLayout(
+#     sidebarPanel(
+#       textOutput("panel")
+#     ),
+#     mainPanel(
+#       tabsetPanel(
+#         id = "tabset",
+#         tabPanel("panel 1", "one"),
+#         tabPanel("panel 2", "two"),
+#         tabPanel("panel 3", "three")
+#       )
+#     )
+#   )
+# )
+# 
+
+# 
+# ui <- fluidPage(
+#   navlistPanel(
+#     id = "tabset",
+#     "Heading 1",
+#     tabPanel("panel 1", "Panel one contents"),
+#     "Heading 2",
+#     tabPanel("panel 2", "Panel two contents"),
+#     tabPanel("panel 3", "Panel three contents")
+#   )
+# )
+
+
+
+ui <- navbarPage(
+  "Page title",
+  tabPanel("panel 1", "one"),
+  tabPanel("panel 2", "two"),
+  tabPanel("panel 3", "three"),
+  navbarMenu("subpanels",
+    tabPanel("Panel 4-a", "four-a"),
+    tabPanel("Panel 4-b", "four-b"),
+    tabPanel("Panel 4-c", "four-c")
   )
 )
 
 
-server <- function(input, output, session){
-  output$hist <- renderPlot({
-    means <- replicate(1e4, mean(runif(input$m)))
-    hist(means, breaks = 20)
-  }, res = 96)
-  
-}
+
+server <- function(input, output, sessions){}
+
+
+
 
 shinyApp(ui = ui, server = server)
 
