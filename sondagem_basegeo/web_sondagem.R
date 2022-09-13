@@ -10,6 +10,8 @@ library(dplyr)
 estados <- read_state()
 municipios <- read_municipality()
 ui <- fluidPage(
+  navbarPage(
+    title=div(img(src=""), "Modulo Sondagem")),
     
          tabsetPanel(
 
@@ -43,7 +45,7 @@ ui <- fluidPage(
 
             tabPanel("Collar/Posição",
                      column(3,
-                     textOutput("codigo_furo"),
+                     fileInput("file", "GPS", buttonLabel = "Upload..."),
                      numericInput("latitude", label = "Latitude", value = 0),
                      numericInput("longitude", label = "Longitude", value = 0),
                      numericInput("elevacao", label = "Elevação", value = 0),
@@ -61,10 +63,10 @@ ui <- fluidPage(
 ###############################################################################
             tabPanel("Descrição/Detalhes do Furo",
                      column(4,
-                     textOutput("codigo_furo_1"),
-                     selectInput("tipo_finalidade", label = "Finalidade da sondagem", choices = c("Perfuração para água", "Perfuração Estratigrafica")),
+                     
+                     radioButtons("tipo_finalidade", label = "Finalidade da sondagem", choices = c("Perfuração para água", "Perfuração Estratigrafica"), inline = T),
                      selectInput("metodo_perfuração", "Método de Perfuração", 
-                                 choices = c("Trado","Percursão SPT","Rotativa", "Mista", "Geofisica")),
+                                 choices = c("Trado","Percursão SPT","Rotativa", "Mista", "Geofisica"), multiple = T),
                      numericInput("diametro_poco", "Diametro do Poço",min = 0,max = 100, value = 0)),
                      
                      column(4,
@@ -78,9 +80,33 @@ ui <- fluidPage(
                      textInput("custodiante_do_dado", label = "Custodiante do Dado"),
                      numericInput("comprimento_poco", label = "Comprimento do Poço", value = 0 ), 
                      actionButton("Salvar",label = "Salvar",class = "btn-lg btn-sucess"))
-            )
-                          
+            ),
 
+
+# Fim da Parte Descrição / Detalhe 
+###############################################################################                          
+          tabPanel("Intervalo/Geologia",
+                   fluidRow(
+                     column(12, div(style ="height:50px; background-color: gray", "Intervalo/Survey")),
+                             column(4, 
+                                    numericInput("profundiade_em", label = "Profundidade em: ", value = 0)),
+                             column(4,
+                                    numericInput("azimuth", label = "Azimuth", value = 0 , min = 0 , max = 359)),
+                             column(4,
+                                    numericInput("inclinacao", label = "Inclinação", value = 0 , min = 0 , max = 90),
+                             fileInput("file", "Dataset", buttonLabel = "Upload...")  )
+                           ),
+                   
+                   fluidRow(
+                     column(12, div(style ="height:50px;background-color: gray","Geologia/Geology")),
+                             column(4, 
+                                    numericInput("profundidade_de", value = 0, label = "profundidade_topo")),
+                             column(4,
+                                    numericInput("profundidade_para",value = 0, label = "profundidade_base")),
+                             column(4,
+                                    textInput("nome_material_density",  label = "Density/Rocha"),
+                                    fileInput("file", "Dataset", buttonLabel = "Upload..."))
+                           ))
 
 
       )
@@ -108,13 +134,7 @@ server <- function(input, output, session){
     
   })
   
-  output$codigo_furo <- renderText({
-    paste0("Código ID furo: ", input$cod_ident_furo)
-  })
   
-  output$codigo_furo_1 <- renderText({
-    paste0("Código ID furo: ", input$cod_ident_furo)
-  })
   
   updateSelectizeInput(session,"municipio", choices = municipios$name_muni, server = TRUE )
   
