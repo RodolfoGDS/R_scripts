@@ -443,20 +443,33 @@ library(ggplot2)
 # )
 
 
-
-ui <- navbarPage(
-  "Page title",
-  tabPanel("panel 1", "one"),
-  tabPanel("panel 2", "two"),
-  tabPanel("panel 3", "three"),
-  navbarMenu("subpanels",
-    tabPanel("Panel 4-a", "four-a"),
-    tabPanel("Panel 4-b", "four-b"),
-    tabPanel("Panel 4-c", "four-c")
+# 
+# ui <- navbarPage(
+#   "Page title",
+#   tabPanel("panel 1", "one"),
+#   tabPanel("panel 2", "two"),
+#   tabPanel("panel 3", "three"),
+#   navbarMenu("subpanels",
+#     tabPanel("Panel 4-a", "four-a"),
+#     tabPanel("Panel 4-b", "four-b"),
+#     tabPanel("Panel 4-c", "four-c")
+#   )
+# )
+# 
+ui <- fluidPage(
+  theme = bslib::bs_theme(bootswatch = "united"),
+  sidebarLayout(
+    sidebarPanel(
+      textInput("txt", "Text input: ", "texte here"),
+      sliderInput( "slider", "Slider input: ", 1, 100, 30)
+    ),
+    mainPanel(
+      h1(paste0("Theme:flatly")),
+      h2("Header 2"),
+      p("Some text")
+    )
   )
 )
-
-
 
 server <- function(input, output, sessions){}
 
