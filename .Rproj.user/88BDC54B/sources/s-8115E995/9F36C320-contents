@@ -16,6 +16,11 @@ municipios <- read_municipality()
 
 ## Interface do usuário
 
+#### lista de temas bootstrap  “cerulean”, “cosmo”, “cyborg”, “darkly”, “flatly”,
+# “journal”, “litera”, “lumen”, “lux”, “materia”, “minty”, “pulse”, “sandstone”,
+#“simplex”, “sketchy”, “slate”, “solar”, “spacelab”, “superhero”, “united”, “yeti”
+
+
 ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 3),
   navbarPage(
     title=div(img(src=""), "Modulo Sondagem")),
@@ -66,9 +71,13 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                      ),
 
 
+# exemplo de longitude e latitude  :   -43.154818, -22.949278
+
         # Fim da Parte de Collar / Posição 
 ###############################################################################
-            tabPanel("Descrição/Detalhes do Furo",
+           
+
+           tabPanel("Descrição/Detalhes do Furo",
                     fluidRow(
                       column(12,div(style ="height:50px; background-color: gray", "Detalhes do Furo")),
                              column(4,
@@ -86,7 +95,8 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                     fluidRow(
                       column(12,div(style ="height:50px; background-color: gray", "Descrição do Furo")),
                             column(4,
-                            radioButtons("tipo_finalidade", label = "Finalidade da sondagem", choices = c("Perfuração para água", "Perfuração Estratigrafica"), inline = T),
+                            radioButtons("tipo_finalidade", label = "Finalidade da sondagem", 
+                                         choices = c("Perfuração para água", "Perfuração Estratigrafica"), inline = T),
                             selectInput("id_metodo_perfuração", "Método de Perfuração", 
                                        choices = c("Trado","Percursão SPT","Rotativa", "Mista", "Geofisica"), multiple = T)),
                       
@@ -104,7 +114,9 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
 
 # Fim da Parte Descrição / Detalhe 
 ###############################################################################                          
-          tabPanel("Intervalo/Geologia",
+         
+
+           tabPanel("Intervalo/Geologia",
                    fluidRow(
                      column(12, div(style ="height:50px; background-color: gray", "Intervalo/Survey")),
                              column(4, 
@@ -134,7 +146,9 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
 
 # Fim da Parte Intervalo/Geologia 
 ###############################################################################   
-            tabPanel("Hidro/Amostra água",
+            
+    
+        tabPanel("Hidro/Amostra água",
                      fluidRow(
                        column(12, div(style = "height: 50px; background-color: gray", "Base Hidro")),
                         column(3,
@@ -153,6 +167,7 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                        column(12, div(style = "height:50px;background-color:gray", "Amostra de Água")),
                         
                        column(4,
+                              textInput("identificacao_amostra",label = "Código da amostra"),
                               dateInput("data_coleta", label = "Data da Coleta in situ", language = "pt",
                                         format = "dd-mm-yyyy" ),
                               textInput("coletor", label = "Coletor")),
@@ -173,7 +188,9 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
 
 # Fim da Parte Base Hidro/ Amostra água
 ###############################################################################   
-        tabPanel("Assay_Amostra/Dado Geofisico",
+       
+
+         tabPanel("Assay_Amostra/Dado Geofisico",
                  fluidRow(
                    column(12, div(style = "height: 50px; background-color: gray","Assay_Amostra")),
                    column(3, 
@@ -213,22 +230,20 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                           textInput("referencia_resultado", label = "Resultado"),
                           actionButton("salvar", label = "Salvar", class = "btn-lg btn-sucess"))
                  )
-                 )
+            )
 
 
 
 # Fim da Parte Assay Amostra / dado Geofisico
 ###############################################################################   
+
+# Fechamento dos parenteses de tabsetPanel e FluidPage
+
   )
 
 ) 
 
-#### lista de temas bootstrap  “cerulean”, “cosmo”, “cyborg”, “darkly”, “flatly”,
-# “journal”, “litera”, “lumen”, “lux”, “materia”, “minty”, “pulse”, “sandstone”,
-#“simplex”, “sketchy”, “slate”, “solar”, “spacelab”, “superhero”, “united”, “yeti”
 
-             
-        
         
 
                         #  fim da User Interface ##
@@ -252,7 +267,7 @@ server <- function(input, output, session){
 }
 
 
-# -43.154818, -22.949278
+
 
                             #  fim do server Side ##
 #######################################################################################################

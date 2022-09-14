@@ -153,6 +153,7 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                        column(12, div(style = "height:50px;background-color:gray", "Amostra de Água")),
                         
                        column(4,
+                              textInput("identificacao_amostra",label = "Código da amostra"),
                               dateInput("data_coleta", label = "Data da Coleta in situ", language = "pt",
                                         format = "dd-mm-yyyy" ),
                               textInput("coletor", label = "Coletor")),
