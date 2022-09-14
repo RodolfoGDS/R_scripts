@@ -1,0 +1,14 @@
+name: sondagem_basegeo
+title: sondagem_basegeo
+username:
+account: basegeosondagem
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7011089
+bundleId: 6301909
+url: https://basegeosondagem.shinyapps.io/sondagem_basegeo/
+when: 1663173081.27865
+lastSyncTime: 1663173081.27869
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: app.R|basegeo.jpeg
