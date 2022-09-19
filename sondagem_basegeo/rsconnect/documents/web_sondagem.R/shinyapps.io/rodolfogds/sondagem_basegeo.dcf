@@ -1,0 +1,13 @@
+name: sondagem_basegeo
+title: sondagem_basegeo
+username:
+account: rodolfogds
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7022608
+bundleId: 6305523
+url: https://rodolfogds.shinyapps.io/sondagem_basegeo/
+when: 1663254057.21517
+lastSyncTime: 1663254057.21519
+asMultiple: FALSE
+asStatic: FALSE
