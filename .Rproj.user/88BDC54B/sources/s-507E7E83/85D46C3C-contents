@@ -587,19 +587,75 @@ library(ggplot2)
 #   
 #   }
 
+# 
+# ui <- fluidPage(
+#   sliderInput("height", "height", min = 100, max = 500, value = 250),
+#   sliderInput("width", "width", min = 100, max = 500, value = 250),
+#   plotOutput("plot", width = 250, height = 250)
+# )
+# 
+# server <- function(input, output, session){
+#   output$plot <- renderPlot(
+#     width = function() input$width,
+#     height = function() input$height,
+#     res = 96,
+#     {
+#       plot(rnorm(20), rnorm(20))
+#     }
+#   )
+# }
+# puppies <- tibble::tribble(
+#   ~breed, ~ id, ~author, 
+#   "corgi", "eoqnr8ikwFE","alvannee",
+#   "labrador", "KCdYn0xu2fU", "shaneguymon",
+#   "spaniel", "TzjMd7i5WQI", "_redo_"
+# )
+# 
+# ui <- fluidPage(
+#   selectInput("id", "Pick a breed", choices = setNames(puppies$id, puppies$breed)),
+#   htmlOutput("source"),
+#   imageOutput("photo")
+# )
+# server <- function(input, output, session) {
+#   output$photo <- renderImage({
+#     list(
+#       src = file.path("puppy-photos", paste0(input$id, ".jpg")),
+#       contentType = "image/jpeg",
+#       width = 500,
+#       height = 650
+#     )
+#   }, deleteFile = FALSE)
+#   
+#   output$source <- renderUI({
+#     info <- puppies[puppies$id == input$id, , drop = FALSE]
+#     HTML(glue::glue("<p>
+#       <a href='https://unsplash.com/photos/{info$id}'>original</a> by
+#       <a href='https://unsplash.com/@{info$author}'>{info$author}</a>
+#     </p>"))
+#   })
+# }
 
-ui <- fluidPage(
-  sliderInput("height", "height", min = 100, max = 500, value = 250),
-  sliderInput("width", "width", min = 100, max = 500, value = 250),
-  plotOutput("plot", width = 250, height = 250)
-)
+# ui <- fluidPage(
+#   shinyFeedback::useShinyFeedback(),
+#   numericInput("n", "n", value = 10),
+#   textOutput("half")
+# )
+# 
+# server <- function(input, output, session){
+#   half <- reactive({
+#     even <- input$n %% 2 == 0
+#     shinyFeedback::feedbackWarning("n", !even, "Please select an even number")
+#     req(even)
+#     input$n / 2
+#   })
+#   
+#   output$half <- renderText(half())
+# }
 
-server <- function(input, output, session){
-  output$plot <- renderPlot(
-    width = function() input$width,
-    height
-  )
-}
+
+
+
+
 
 
 
