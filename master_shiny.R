@@ -3,6 +3,13 @@
 ## link do livro: https://mastering-shiny.org/index.html
 #Colocando o R em produção: https://rstudio.com/resources/rstudioconf-2019/shiny-in-production-principles-practices-and-ferramentas/
 
+# Livro de R sobre visualização web
+## https://plotly-r.com/index.html 
+
+
+
+
+
 # Instalando pacotes necessários para acompnhar o livro 
 
 install.packages(c(
