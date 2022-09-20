@@ -1,0 +1,26 @@
+{
+    "id": "F695017A",
+    "path": "~/projetos_versionados/R_scripts/daily.expenses/daily_expenses.R",
+    "project_path": "daily.expenses/daily_expenses.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1663691409037.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "3,45",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1663696972,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1663697524051,
+    "read_only": false,
+    "read_only_alternatives": []
+}
