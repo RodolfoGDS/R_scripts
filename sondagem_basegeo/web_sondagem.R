@@ -12,6 +12,8 @@ library(dplyr)
 
 estados <- read_state()
 municipios <- read_municipality()
+# View(head(municipios))
+# View(head(estados))
 
 # https://mastering-shiny.org/action-tidy.html
 ## Interface do usuário
@@ -39,7 +41,7 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                      textInput("custodiante_poço",label = "Custodiante do Poço"),
                      dateInput("data_inicio", label = "Data de início da Perfuração", language = "pt", format = "dd-mm-yyyy"),
                      dateInput("data_final", label = "Data final da Perfuração", language = "pt",  format = "dd-mm-yyyy"),
-                     selectInput("estado", label = "Estado",selected = estados$name_state[2],estados$name_state)),
+                     selectInput("estado", label = "Estado",choices = unique(estados$abbrev_state))),
                      
                      column(4,
                      
@@ -256,6 +258,19 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
 
 
 server <- function(input, output, session){
+  
+  
+  estado <- reactive({
+    filter(municipios, abbrev_state == input$estado)
+  })
+  
+  observeEvent(estado(), {
+    choices <- unique(estado()$name_muni)
+    updateSelectInput(inputId = "municipio", choices = choices)
+  })
+  
+  
+  
   output$mapa <- renderLeaflet({
     leaflet() %>% addTiles() %>% 
       addMarkers(lng = input$longitude, lat = input$latitude, popup = input$cod_ident_furo)
