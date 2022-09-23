@@ -20,7 +20,18 @@ gs4_auth()
 
 # lendo um arquivo do google 
 
-EntradaSalario <- read_sheet("https://docs.google.com/spreadsheets/d/1Qe6SBb3eSG3-LcdMQHU36XpPofNfxhNPYPN-0PBBrmQ/edit#gid=0")
+
+
+EntradaSalario <- ("https://docs.google.com/spreadsheets/d/1Qe6SBb3eSG3-LcdMQHU36XpPofNfxhNPYPN-0PBBrmQ/edit#gid=0")
 df1 <- data.frame(3555,"21-09-2022",2323,55444,"CDB")
-sheet_append(EntradaSalario, df1)
+
+
+## função para salvar
+
+saveData <- function(data, SHEET_ID){
+  data <- data %>% as.list() %>% data.frame()
+  sheet_append(SHEET_ID, data)
+}
+
+saveData(df1,EntradaSalario )
 
