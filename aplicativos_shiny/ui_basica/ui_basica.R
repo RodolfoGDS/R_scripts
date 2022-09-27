@@ -715,28 +715,28 @@ library(ggplot2)
 #     paste0(greetings[[input$language]], " ", input$name, "!")
 #   })
 # }
-
-ui <- fluidPage(
-  shinyFeedback::useShinyFeedback(),
-  textInput("dataset", "Dataset name"),
-  tableOutput("data")
-)
-
-server <- function(input, output, session){
-  data <- reactive({
-    req(input$dataset)
-    
-    exists <- exists(input$dataset, "package:datasets")
-    shinyFeedback::feedbackDanger("dataset", !exists, "Unknow dataset")
-    req(exists, cancelOutput = TRUE)
-    
-    get(input$dataset, "package:datasets")
-  })
-  
-  output$data <- renderTable({
-    head(data())
-  })
-}
+# 
+# ui <- fluidPage(
+#   shinyFeedback::useShinyFeedback(),
+#   textInput("dataset", "Dataset name"),
+#   tableOutput("data")
+# )
+# 
+# server <- function(input, output, session){
+#   data <- reactive({
+#     req(input$dataset)
+#     
+#     exists <- exists(input$dataset, "package:datasets")
+#     shinyFeedback::feedbackDanger("dataset", !exists, "Unknow dataset")
+#     req(exists, cancelOutput = TRUE)
+#     
+#     get(input$dataset, "package:datasets")
+#   })
+#   
+#   output$data <- renderTable({
+#     head(data())
+#   })
+# }
 
 library(tidyverse)
 tidyverse_update()
@@ -784,6 +784,15 @@ tidyverse_update()
 #   
 # }
 
+
+#Graficos
+
+
+
+
+
+
+#
 shinyApp(ui = ui, server = server)
 
 
