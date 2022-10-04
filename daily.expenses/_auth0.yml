@@ -1,0 +1,7 @@
+name: myApp
+remote_url: https://rodolfogds.shinyapps.io/dailyexpensives
+auth0_config:
+  api_url: 'https://dev-883c8--s.us.auth0.com'
+  credentials:
+    key: YfWSQoWSxDaahqXi1DW3DHeBlKtINcmW
+    secret: KdqVz2WMzm2fLyNFGxT5oCGHHWz0EprNLdi_rG9aFTW3T5vVuAiHCGOuxn7mPHro
