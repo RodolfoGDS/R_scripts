@@ -33,7 +33,7 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                      
                      column(4,
                      textInput("cod_ident_furo",label = "Código de identificação do furo"),
-                     textInput("cod_projeto",label =  "Código do Projeto"),
+                     textInput("cod_projeto",label =  "Código do Projeto de Sondagem"),
                      textInput("operador_poço",label =  "Operador do Poço"),
                      textInput("sondador_poço",label =  "Sondador do Poço" )),
                      
@@ -98,7 +98,9 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                       column(12,div(style ="height:50px; background-color: gray", "Descrição do Furo")),
                             column(4,
                             radioButtons("tipo_finalidade", label = "Finalidade da sondagem", 
-                                         choices = c("Perfuração para água", "Perfuração Estratigrafica"), inline = T),
+                                         choices = c("Perfuração para água", "Perfuração Estratigrafica",
+                                                     "Perfuração para minério", "Perfuração para óleo e gás",
+                                                     "Perfuração geotecnica"), inline =F),
                             selectInput("id_metodo_perfuração", "Método de Perfuração", 
                                        choices = c("Trado","Percursão SPT","Rotativa", "Mista", "Geofisica"), multiple = T)),
                       
