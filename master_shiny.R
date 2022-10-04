@@ -6,6 +6,8 @@
 # Livro de R sobre visualização web
 ## https://plotly-r.com/index.html 
 
+#Bibliografia: https://shiny.rstudio.com/articles/persistent-data-storage.html
+## https://github.com/tidyverse/googlesheets4
 
 
 
