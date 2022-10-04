@@ -1,0 +1,14 @@
+name: dailyexpensives
+title: dailyexpensives
+username:
+account: rodolfogds
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7174148
+bundleId: 6364876
+url: https://rodolfogds.shinyapps.io/dailyexpensives/
+when: 1664821941.96664
+lastSyncTime: 1664821941.96665
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: _auth0.yml|app.R
