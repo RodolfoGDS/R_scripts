@@ -1,0 +1,13 @@
+name: dailyexpenses
+title: dailyexpenses
+username:
+account: rodolfogds
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7174063
+bundleId: 6356897
+url: https://rodolfogds.shinyapps.io/dailyexpenses/
+when: 1664561300.92837
+lastSyncTime: 1664561300.92838
+asMultiple: FALSE
+asStatic: FALSE
