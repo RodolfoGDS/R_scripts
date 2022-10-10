@@ -5,10 +5,10 @@ account: basegeosondagem
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7011089
-bundleId: 6331486
+bundleId: 6387675
 url: https://basegeosondagem.shinyapps.io/sondagem_basegeo/
-when: 1663943192.30796
-lastSyncTime: 1663943192.30798
+when: 1665408017.54592
+lastSyncTime: 1665408017.54594
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: app.R|basegeo.jpeg
