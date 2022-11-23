@@ -28,63 +28,63 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
     title=div(img(src=""), "Modulo Sondagem")),
     
          tabsetPanel(
-
-            tabPanel("Identificação",
-                     
-                     column(4,
-                     textInput("cod_ident_furo",label = "Código de identificação do furo"),
-                     textInput("cod_projeto",label =  "Código do Projeto de Sondagem"),
-                     textInput("operador_furo",label =  "Operador do Furo"),
-                     textInput("sondador_furo",label =  "Sondador do Furo" )),
-                     
-                     column(4,
-                     selectInput("origem_dado", "Fonte de origem dos dados", choices = c("DHT-SIAGAS","DHT-RIMAS","DHT-DEGET", "DGM","ANP","Outros")),
-                     textInput("custodiante_furo",label = "Custodiante do Furo"),
-                     dateInput("data_inicio", label = "Data de início da Perfuração", language = "pt", format = "dd-mm-yyyy"),
-                     dateInput("data_final", label = "Data final da Perfuração", language = "pt",  format = "dd-mm-yyyy")),
+           
+           
+           
+           tabPanel("Posicionamento",
+                    column(3,
+                           fileInput("file", "GPS", buttonLabel = "Upload"),
+                           textInput("cod_ident_furo",label = "Código de identificação do furo"),
+                           dateInput("data_determinacao", label = "Data de Determinação", language = "pt",format = "dd-mm-yyyy"),
+                           numericInput("latitude", label = "Latitude", value = 0),
+                           numericInput("longitude", label = "Longitude", value = 0),
+                           numericInput("elevacao", label = "Elevação", value = 0),
+                           textInput("datum", label = "Datum"),
+                           textInput("metodo_posicionamento", label=  "Método de Posiconamento"),
+                           numericInput("precisao_posicional", label = "Precisão Posicional", value = 0),
+                           selectInput("estado", label = "Estado",choices = unique(estados$abbrev_state)),
+                           selectizeInput("municipio", label = "Municipio",  choices = NULL),
+                           actionButton("Salvar",label = "Salvar",class = "btn-lg btn-sucess")),
                     
-                     
-                     column(4,
-                     
-                     textInput("identificador_herdado", "Código Herdado"),
-                     textInput("referencia", label =  "Documento de Referencia"),
-                     textInput("observacao", label =  "Observação"),
-                     actionButton("Salvar",label = "Salvar",class = "btn-lg btn-sucess"))
-                     
-                     ),
+                    column(9,
+                           leafletOutput("mapa"))
+                    
+           ),
+
+           # exemplo de longitude e latitude  :   -43.154818, -22.949278
             
-            
-       #  Fim  da identificação do furo de sondagem      
+       #  Fim  da parte de Posicionamento  
 ################################################################################
+tabPanel("Caracterização da Perfuração",
+         
+         column(4,
+                
+                textInput("cod_projeto",label =  "Código do Projeto de Sondagem"),
+                textInput("operador_furo",label =  "Operador do Furo"),
+                textInput("sondador_furo",label =  "Sondador do Furo" )),
+         
+         column(4,
+                selectInput("origem_dado", "Fonte de origem dos dados", choices = c("DHT-SIAGAS","DHT-RIMAS","DHT-DEGET", "DGM","ANP","Outros")),
+                textInput("custodiante_furo",label = "Custodiante do Furo"),
+                dateInput("data_inicio", label = "Data de início da Perfuração", language = "pt", format = "dd-mm-yyyy"),
+                dateInput("data_final", label = "Data final da Perfuração", language = "pt",  format = "dd-mm-yyyy")),
+         
+         
+         column(4,
+                
+                textInput("identificador_herdado", "Código Herdado"),
+                textInput("referencia", label =  "Documento de Referencia"),
+                textInput("observacao", label =  "Observação"),
+                actionButton("Salvar",label = "Salvar",class = "btn-lg btn-sucess"))
+         
+),
 
 
-            tabPanel("Collar/Posição",
-                     column(3,
-                     fileInput("file", "GPS", buttonLabel = "Upload"),
-                     dateInput("data_determinacao", label = "Data de Determinação", language = "pt",  format = "dd-mm-yyyy"),
-                     numericInput("latitude", label = "Latitude", value = 0),
-                     numericInput("longitude", label = "Longitude", value = 0),
-                     numericInput("elevacao", label = "Elevação", value = 0),
-                     textInput("datum", label = "Datum"),
-                     textInput("metodo_posicionamento", label=  "Método de Posiconamento"),
-                     numericInput("precisao_posicional", label = "Precisão Posicional", value = 0),
-                     selectInput("estado", label = "Estado",choices = unique(estados$abbrev_state)),
-                     selectizeInput("municipio", label = "Municipio",  choices = NULL),
-                     actionButton("Salvar",label = "Salvar",class = "btn-lg btn-sucess")),
-                     
-                     column(9,
-                     leafletOutput("mapa"))
-                     
-                     ),
-
-
-# exemplo de longitude e latitude  :   -43.154818, -22.949278
-
-        # Fim da Parte de Collar / Posição 
+        # Caracterização da Perfuração
 ###############################################################################
            
 
-           tabPanel("Descrição/Detalhes do Furo",
+           tabPanel("Descrição e Detalhes do Furo",
                     fluidRow(
                       column(12,div(style ="height:50px; background-color: gray", "Detalhes do Furo")),
                              column(4,
@@ -96,7 +96,7 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                              textInput("custodiante_do_dado", label = "Custodiante do Dado")),
                             
                             column(4,
-                             numericInput("comprimento_poco", label = "Comprimento do Poço", value = 0 ),
+                             numericInput("comprimento_poco", label = "Comprimento máximo", value = 0 ),
                              actionButton("Salvar",label = "Salvar",class = "btn-lg btn-sucess"))),
                     
                     fluidRow(
@@ -132,7 +132,7 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
 
            tabPanel("Intervalo/Geologia",
                    fluidRow(
-                     column(12, div(style ="height:50px; background-color: gray", "Intervalo/Survey")),
+                     column(12, div(style ="height:50px; background-color: gray", "Intervalo")),
                              column(4, 
                                     numericInput("profundiade_em", label = "Profundidade em: ", value = 0),
                                     fileInput("file", "Dataset", buttonLabel = "Upload")  ),
@@ -148,7 +148,7 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
                           
                    
                    fluidRow(
-                     column(12, div(style ="height:50px;background-color: gray","Geologia/Geology")),
+                     column(12, div(style ="height:50px;background-color: gray","Geologia do Perfil")),
                              column(4, 
                                     numericInput("profundidade_de", value = 0, label = "profundidade_topo"),
                                     fileInput("file", "Dataset", buttonLabel = "Upload")),
@@ -165,7 +165,7 @@ ui <- fluidPage( theme = bslib::bs_theme(bg = "white",fg = "black",   version = 
 # Fim da Parte Intervalo/Geologia 
 ###############################################################################   
 
-         tabPanel("Assay_Amostra/Dado Geofisico",
+         tabPanel("Modulo_amostra/Dado Geofisico",
                  fluidRow(
                    column(12, div(style = "height: 50px; background-color: gray","Assay_Amostra")),
                    column(3, 
